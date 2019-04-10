@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/Familiada-React/precache-manifest.bdeb265617e20c3fca8722b17baf9f72.js"
+  "/Familiada-React/precache-manifest.efe4a1bbe000c939d0f7395bb3dd6e8b.js"
 );
 
 workbox.clientsClaim();

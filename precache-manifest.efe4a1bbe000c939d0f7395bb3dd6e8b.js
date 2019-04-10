@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "d75cdcb184b145ceee9c",
+    "revision": "5abc6ce4bb5edbf23def",
     "url": "/Familiada-React/static/css/main.1ad015db.chunk.css"
   },
   {
-    "revision": "d75cdcb184b145ceee9c",
-    "url": "/Familiada-React/static/js/main.b56e586c.chunk.js"
+    "revision": "5abc6ce4bb5edbf23def",
+    "url": "/Familiada-React/static/js/main.bce6c014.chunk.js"
   },
   {
     "revision": "52fcee7386cdda67fd55",
@@ -32,19 +32,19 @@ self.__precacheManifest = [
     "url": "/Familiada-React/static/media/familiada.bed6fdce.woff"
   },
   {
-    "revision": "2e6dc538968f0bf86b4b3cfdac7fd937",
-    "url": "/Familiada-React/static/media/familiada.2e6dc538.eot"
-  },
-  {
     "revision": "d0c2996cade82938e5d0c5131f132d0e",
     "url": "/Familiada-React/static/media/familiada.d0c2996c.ttf"
+  },
+  {
+    "revision": "2e6dc538968f0bf86b4b3cfdac7fd937",
+    "url": "/Familiada-React/static/media/familiada.2e6dc538.eot"
   },
   {
     "revision": "33b1f61cfdb35373ff9fa76538a784da",
     "url": "/Familiada-React/static/media/familiada.33b1f61c.svg"
   },
   {
-    "revision": "d2d4054cef16a10f01521a645bbc6a43",
+    "revision": "7a260c91362140a59eea4db32b5573c1",
     "url": "/Familiada-React/index.html"
   }
 ];

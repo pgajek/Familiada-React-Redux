@@ -1,0 +1,141 @@
+.questionBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
+.winner{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    font-size: 3em;
+}
+.question{
+    font-size: 2em;
+    line-height: 2.2em;
+    padding: 4vw 0;
+    width:80%;
+}
+.answers{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.answerBox{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2vh;
+    font-size: 1.5em;
+    line-height: 1.6em;
+}
+.answerForm{
+    justify-self: flex-end;
+    position: relative;
+}
+.answerForm label{
+    font-size: 1.3em;
+    padding: 2vw;
+}
+.answerForm input{
+    margin: 10px 5px;
+}
+.answerFormBtn{
+    border: 1px dotted yellow;
+    font-family: 'Familiada Regular';
+    padding: 2vh 2vw;
+    margin: 2vw;
+}
+.activeTeam{
+    font-size: 1.3em;
+}
+@media(orientation: landscape){
+    .winner{
+        font-size: 2em;
+    }
+    .question{
+        font-size: 1.5em;
+        line-height: 1.6em;
+    }
+    .answerBox{
+        padding: 2vh;
+        font-size: 1.2em;
+        line-height: 1.3em;
+    }
+    .answerForm{
+        justify-self: flex-end;
+        align-self: center;
+        width: 80%;
+    }
+    .answerForm label{
+        font-size: 1.1em;
+        padding: 2vw;
+    }
+    .answerForm input{
+        padding: 2px;
+    }
+    .formBtn{
+        padding: 2vh 2vw;
+        margin: 2vh;
+    }
+}
+@media(orientation: landscape) and (min-width: 731px){
+    .winner{
+        font-size: 3em;
+    }
+    .question{
+        font-size: 2em;
+        line-height: 2.1em;
+    }
+    .answerBox{
+        padding: 2vh;
+        font-size: 1.5em;
+        line-height: 1.6em;
+    }
+    .answerForm label{
+        font-size: 1.3em;
+        padding: 2vw;
+    }
+    .answerForm input{
+        padding: 5px;
+    }
+    .formBtn{
+        padding: 2vh 2vw;
+        margin: 2vh;
+    }
+}
+@media(orientation: landscape) and (min-width: 1024px){
+    .winner{
+        font-size: 5em;
+    }
+    .question{
+        font-size: 3.5em;
+    }
+    .answerBox{
+        font-size: 2.8em;
+    }
+    .answerForm label{
+        font-size:2em;
+    }
+    .answerForm input{
+        padding: 5px;
+        font-size: 1.5em;
+    }
+    .formBtn{
+        font-size: 1.5em;
+    }
+}
+@media(orientation: landscape) and (min-width: 1366px){
+    .activeTeam{
+        font-size: 2em;
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin-left: 3%;
+    }
+}

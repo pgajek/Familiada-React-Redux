@@ -1,0 +1,38 @@
+.whosFirst{
+    display: flex;
+    z-index: 9;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0%;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    flex-direction: column;
+
+}
+.btns{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.whosFirst button{
+    padding: 10vh 2vw;
+    font-size: 1.5em;
+}
+.whosFirst .question{
+    text-align: center;
+}
+@media(orientation: landscape) and (min-width: 1024px)
+{
+    .whosFirst button{
+        font-size: 2em;
+    }
+}
+@media(orientation: landscape) and (min-width: 1366px)
+{
+    .whosFirst button{
+        font-size: 2.5em;
+    }
+}

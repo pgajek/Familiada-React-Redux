@@ -24,11 +24,11 @@ class App extends Component {
     // this.introAudio.pause();
   };
   componentDidMount() {
-    document.addEventListener('keyup', this.props.hanldeWhosFirst);
+    document.addEventListener('keyup', e => this.props.handleWhosFirst(e));
     // this.introAudio.play();
   }
   componentWillUnmount() {
-    document.removeEventListener('keyup', this.props.handleWhosFirst);
+    document.removeEventListener('keyup', e => this.props.handleWhosFirst(e));
   }
   render() {
     const {
@@ -96,7 +96,13 @@ const mapDispatchToProps = dispatch => {
           surname2
         }
       }),
-    handleWhosFirst: e => dispatch({ type: 'WHOS_FIRST', payload: e })
+    handleWhosFirst: e => {
+      if (e.keyCode === 65) {
+        dispatch({ type: 'WHOS_FIRST', payload: 'team1' });
+      } else if (e.keyCode === 76) {
+        dispatch({ type: 'WHOS_FIRST', payload: 'team2' });
+      }
+    }
   };
 };
 export default connect(

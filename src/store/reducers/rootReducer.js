@@ -288,6 +288,12 @@ export const rootReducer = (state = initialState, action) => {
           name: action.payload.surname2
         }
       };
+    case 'WHOS_FIRST':
+      return {
+        ...state,
+        activeTeam: action.payload,
+        whosFirst: false
+      };
     default:
       return state;
   }

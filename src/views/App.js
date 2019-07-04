@@ -45,14 +45,7 @@ class App extends Component {
           </h2>
         </div>
 
-        {whosFirst ? (
-          <WhosFirst
-            // whosFirst={this.handleWhosFirst}
-            question={currentQuestion.question}
-            team1={team1}
-            team2={team2}
-          />
-        ) : null}
+        {whosFirst ? <WhosFirst /> : null}
         <SideBoard team={team1} />
         <MainBoard
           value={inputValue}

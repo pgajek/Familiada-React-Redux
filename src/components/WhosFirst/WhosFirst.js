@@ -1,5 +1,6 @@
 import React from 'react';
 import './WhosFirst.css';
+import { connect } from 'react-redux';
 
 const WhosFirst = ({ whosFirst, question, team1, team2 }) => {
   return (
@@ -16,5 +17,20 @@ const WhosFirst = ({ whosFirst, question, team1, team2 }) => {
     </div>
   );
 };
-
-export default WhosFirst;
+const mapStateToProps = state => {
+  return {
+    question: state.currentQuestion,
+    team1: state.team1,
+    team2: state.team2
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    whosFirst: e =>
+      dispatch({ type: 'WHOS_FIRST', payload: e.target.dataset.id })
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WhosFirst);

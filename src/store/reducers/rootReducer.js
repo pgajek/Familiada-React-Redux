@@ -294,6 +294,24 @@ export const rootReducer = (state = initialState, action) => {
         activeTeam: action.payload,
         whosFirst: false
       };
+    case 'SURNAME_CHANGE':
+      return {
+        ...state,
+        [action.payload.name]: action.payload.value
+      };
+    case 'START_GAME':
+      return {
+        ...state,
+        team1: {
+          ...state.team1,
+          name: state.surname1
+        },
+        team2: {
+          ...state.team2,
+          name: state.surname2
+        },
+        whosFirst: true
+      };
     default:
       return state;
   }

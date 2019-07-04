@@ -1,6 +1,7 @@
 import React from 'react';
 import './StartPage.css';
-
+import { connect } from 'react-redux';
+import { store } from '../../index';
 const StartPage = ({ start, surname1, surname2, change }) => {
   return (
     <div className="startingPage">
@@ -11,14 +12,44 @@ const StartPage = ({ start, surname1, surname2, change }) => {
       </label>
       <label htmlFor="surname2">
         Nazwisko 2:
-        <input type="text" id="surname2" value={surname2} onChange={change} />
+        <input
+          type="text"
+          id="surname2"
+          value={surname2}
+          onChange={e => change(e)}
+        />
       </label>
-      <button className="btn" onClick={start}>
+      <button className="btn" onClick={e => start(e)}>
         {' '}
         Start
       </button>
     </div>
   );
 };
-
-export default StartPage;
+const mapStateToProps = state => {
+  return {
+    surname1: state.surname1,
+    surname2: state.surname2
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    change: e => {
+      dispatch({
+        type: 'SURNAME_CHANGE',
+        payload: {
+          name: e.target.id,
+          value: e.target.value
+        }
+      });
+    },
+    start: e => {
+      e.preventDefault();
+      dispatch({ type: 'START_GAME' });
+    }
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StartPage);

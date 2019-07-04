@@ -23,6 +23,13 @@ class App extends Component {
     // this.newQuestion();
     // this.introAudio.pause();
   };
+  componentDidMount() {
+    document.addEventListener('keyup', this.props.hanldeWhosFirst);
+    // this.introAudio.play();
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keyup', this.props.handleWhosFirst);
+  }
   render() {
     const {
       team1,
@@ -88,7 +95,8 @@ const mapDispatchToProps = dispatch => {
           surname1,
           surname2
         }
-      })
+      }),
+    handleWhosFirst: e => dispatch({ type: 'WHOS_FIRST', payload: e })
   };
 };
 export default connect(

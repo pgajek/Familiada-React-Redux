@@ -3,46 +3,96 @@ import SideBoard from '../components/SideBoard/SideBoard';
 import MainBoard from '../components/MainBoard/MainBoard';
 import './App.css';
 import WhosFirst from '../components/WhosFirst/WhosFirst';
-import failSound from '../audio/fail.mp3';
-import introSound from '../audio/intro.mp3';
-import goodSound from '../audio/good.mp3';
 import { connect } from 'react-redux';
+import intro from '../audio/intro.mp3';
 
 class App extends Component {
-  failAudio = new Audio(failSound);
-  introAudio = new Audio(introSound);
-  goodAudio = new Audio(goodSound);
-
-  handleGameStart = () => {
-    const { surname1, surname2, handleGameStartAction } = this.props;
-
-    if (surname1 !== '' && surname2 !== '') {
-      handleGameStartAction(surname1, surname2);
-    }
-
-    // this.newQuestion();
-    // this.introAudio.pause();
-  };
+  intro = new Audio(intro);
   componentDidMount() {
-    document.addEventListener('keyup', e => this.props.handleWhosFirst(e));
-    // this.introAudio.play();
+    document.addEventListener('keyup', e => {
+      const { whosFirst } = this.props;
+      this.props.handleWhosFirst(e, whosFirst);
+    });
+    this.props.newQuestion();
+    // this.intro.play();
   }
   componentWillUnmount() {
-    document.removeEventListener('keyup', e => this.props.handleWhosFirst(e));
+    const { whosFirst } = this.props;
+    document.removeEventListener('keyup', e =>
+      this.props.handleWhosFirst(e, whosFirst)
+    );
   }
-  render() {
+  checkFails = () => {
     const {
+      activeTeam,
       team1,
       team2,
-      surname1,
-      surname2,
-      activeTeam,
+      handleNewWinner,
+      newQuestion,
+      winner,
+      handleCheckFails
+    } = this.props;
+
+    if (team1.fails > 2 && team2.fails > 2) {
+      const newWinner = this.checkWinner();
+      if (newWinner !== '' && winner === '') {
+        handleNewWinner(newWinner);
+      } else {
+        setTimeout(newQuestion, 3000);
+      }
+    } else if (this.props[activeTeam].fails > 2) {
+      if (activeTeam === 'team1') {
+        handleCheckFails('team2');
+      } else if (activeTeam === 'team2') {
+        handleCheckFails('team1');
+      }
+    }
+  };
+
+  checkWinner() {
+    const { team1, team2 } = this.props;
+    if (team1.points >= 250 && team2.points >= 250) {
+      if (team1.points > team2.points) {
+        return 'team1';
+      } else {
+        return 'team2';
+      }
+    } else if (team1.points >= 250 && team2.points < 250) {
+      return 'team1';
+    } else if (team1.points < 250 && team2.points >= 250) {
+      return 'team2';
+    } else {
+      return '';
+    }
+  }
+  checkCorrects = () => {
+    const {
       currentQuestion,
       winner,
-      whosFirst,
-      inputValue,
-      handleGameStart
+      handleNewWinner,
+      newQuestion
     } = this.props;
+    if (
+      currentQuestion.answers.filter(answer => answer.correct === false)
+        .length === 0
+    ) {
+      const newWinner = this.checkWinner();
+
+      if (newWinner !== '' && winner === '') {
+        handleNewWinner(newWinner);
+      }
+      setTimeout(newQuestion, 3000);
+    }
+  };
+  componentDidUpdate() {
+    const { gameStarted } = this.props;
+    if (gameStarted) {
+      this.checkFails();
+      this.checkCorrects();
+    }
+  }
+  render() {
+    const { team1, team2, whosFirst } = this.props;
     return (
       <main className="app">
         <div className="turnHorizon">
@@ -54,55 +104,40 @@ class App extends Component {
 
         {whosFirst ? <WhosFirst /> : null}
         <SideBoard team={team1} />
-        <MainBoard
-          value={inputValue}
-          // change={this.handleAnswerInput}
-          // gameStarted={this.state.gameStarted}
-          start={this.handleGameStart}
-          question={currentQuestion}
-          // handleAnswerBtn={this.handleAnswerButtonClick}
-          winner={winner}
-          activeTeam={activeTeam}
-          surname1={surname1}
-          surname2={surname2}
-          team1={team1}
-          team2={team2}
-        />
+        <MainBoard />
         <SideBoard team={team2} />
       </main>
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     whosFirst: state.whosFirst,
-    currentQuestion: state.currentQuestion,
     team1: state.team1,
     team2: state.team2,
-    surname1: state.surname1,
-    surname2: state.surname2,
+    gameStarted: state.gameStarted,
     activeTeam: state.activeTeam,
     winner: state.winner,
-    inputValue: state.inputValue
+    currentQuestion: state.currentQuestion
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    handleGameStartAction: (surname1, surname2) =>
-      dispatch({
-        type: 'HANDLE_GAME_START',
-        payload: {
-          surname1,
-          surname2
+    handleWhosFirst: (e, whosFirst) => {
+      if (whosFirst) {
+        if (e.keyCode === 65) {
+          dispatch({ type: 'WHOS_FIRST', payload: 'team1' });
+        } else if (e.keyCode === 76) {
+          dispatch({ type: 'WHOS_FIRST', payload: 'team2' });
         }
-      }),
-    handleWhosFirst: e => {
-      if (e.keyCode === 65) {
-        dispatch({ type: 'WHOS_FIRST', payload: 'team1' });
-      } else if (e.keyCode === 76) {
-        dispatch({ type: 'WHOS_FIRST', payload: 'team2' });
       }
-    }
+    },
+    newQuestion: () => dispatch({ type: 'NEW_QUESTION' }),
+    handleNewWinner: winner =>
+      dispatch({ type: 'NEW_WINNER', payload: winner }),
+    handleCheckFails: team =>
+      dispatch({ type: 'HANDLE_CHECK_FAILS', payload: team })
   };
 };
 export default connect(

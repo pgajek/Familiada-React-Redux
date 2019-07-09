@@ -7,10 +7,10 @@ const WhosFirst = ({ whosFirst, question, team1, team2 }) => {
     <div className="whosFirst" onKeyPress={e => whosFirst(e)}>
       <h2 className="question">{question}</h2>
       <div className="btns">
-        <button className="btn" onClick={whosFirst} data-id="team1">
+        <button className="btn" onClick={e => whosFirst(e)} data-id="team1">
           {team1.name}: A
         </button>
-        <button className="btn" onClick={whosFirst} data-id="team2">
+        <button className="btn" onClick={e => whosFirst(e)} data-id="team2">
           {team2.name}: L
         </button>
       </div>
@@ -19,7 +19,7 @@ const WhosFirst = ({ whosFirst, question, team1, team2 }) => {
 };
 const mapStateToProps = state => {
   return {
-    question: state.currentQuestion,
+    question: state.currentQuestion.question,
     team1: state.team1,
     team2: state.team2
   };

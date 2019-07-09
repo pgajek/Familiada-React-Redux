@@ -267,7 +267,7 @@ const initialState = {
   gameStarted: false,
   inputValue: '',
   activeTeam: 'team1',
-  winner: '',
+  winner: null,
   whosFirst: false,
   surname1: '',
   surname2: ''
@@ -275,26 +275,13 @@ const initialState = {
 
 export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'HANDLE_GAME_START':
-      return {
-        ...state,
-        gameStarted: true,
-        team1: {
-          ...state.team1,
-          name: action.payload.surname1
-        },
-        team2: {
-          ...state.team2,
-          name: action.payload.surname2
-        }
-      };
     case 'WHOS_FIRST':
       return {
         ...state,
         activeTeam: action.payload,
         whosFirst: false
       };
-    case 'SURNAME_CHANGE':
+    case 'INPUT_CHANGE':
       return {
         ...state,
         [action.payload.name]: action.payload.value
@@ -310,7 +297,57 @@ export const rootReducer = (state = initialState, action) => {
           ...state.team2,
           name: state.surname2
         },
-        whosFirst: true
+        whosFirst: true,
+        gameStarted: true
+      };
+
+    case 'NEW_QUESTION':
+      const question = questions[Math.floor(Math.random() * questions.length)];
+      const newQuestions = questions.filter(q => q !== question);
+      return {
+        ...state,
+        currentQuestion: question,
+        questions: newQuestions,
+        team1: {
+          ...state.team1,
+          fails: 0
+        },
+        team2: {
+          ...state.team2,
+          fails: 0
+        }
+      };
+    case 'CORRECT_ANSWERS':
+      const activeTeam = state.activeTeam;
+      return {
+        ...state,
+        inputValue: '',
+        [activeTeam]: {
+          ...state[activeTeam],
+          points: state[activeTeam].points + action.payload.answer[0].points
+        }
+      };
+
+    case 'ADD_FAILS':
+      const active = state.activeTeam;
+      return {
+        ...state,
+        inputValue: '',
+        activeTeam: active,
+        [active]: {
+          ...state[active],
+          fails: state[active].fails + 1
+        }
+      };
+    case 'HANDLE_CHECK_FAILS':
+      const team = action.payload;
+      return {
+        ...state,
+        activeTeam: team,
+        [team]: {
+          ...state[team],
+          fails: 2
+        }
       };
     default:
       return state;

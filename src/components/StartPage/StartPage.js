@@ -1,7 +1,7 @@
 import React from 'react';
 import './StartPage.css';
 import { connect } from 'react-redux';
-import { store } from '../../index';
+
 const StartPage = ({ start, surname1, surname2, change }) => {
   return (
     <div className="startingPage">
@@ -36,7 +36,7 @@ const mapDispatchToProps = dispatch => {
   return {
     change: e => {
       dispatch({
-        type: 'SURNAME_CHANGE',
+        type: 'INPUT_CHANGE',
         payload: {
           name: e.target.id,
           value: e.target.value

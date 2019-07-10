@@ -1,0 +1,47 @@
+.sideBoard, .fails, .poinst{
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    text-align: center;
+}
+
+.sideBoard{
+    width: 10%;
+    height: 100%;
+    flex-direction: column;
+}
+.fail{
+    padding: 3vh 0;
+}
+.fails{
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  align-items: center;
+  justify-content: center;
+  font-size: 3em;
+}
+.points{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 2vw;
+    min-height: 20vh;
+    width: 100%;
+    font-size: 2em;
+
+}
+@media(orientation:landscape) and (min-width: 1024px){
+
+    .fails{
+      font-size: 5em;
+    }
+    .points{
+
+        padding: 2vw;
+        min-height: 20vh;
+        width: 100%;
+        font-size: 5em;
+    }
+}
+

@@ -1,0 +1,32 @@
+.startingPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+}
+.familiada{
+    font-size: 3em;
+}
+.startingPage label{
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+}
+@media(orientation: landscape) and (min-width: 1024px ){
+    .familiada{
+        font-size: 7em;
+    }
+    .startingPage label{
+        font-size: 2.5em;
+    }
+}
+@media(orientation: landscape) and (min-width: 1366px ){
+    .familiada{
+        font-size: 9em;
+    }
+    .startingPage label{
+        font-size: 3em;
+    }
+}

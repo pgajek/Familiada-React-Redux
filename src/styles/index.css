@@ -1,0 +1,57 @@
+@font-face {
+  font-family:"Familiada Regular";
+  src:url('../assets/familiada-font/familiada.ttf') format("truetype"), url('../assets/familiada-font/familiada.woff') format('woff'), url('../assets/familiada-font/familiada.svg') format('svg'),url('../assets/familiada-font/familiada.eot') format('eot');
+  font-weight:normal;
+  font-style: normal;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #000;
+  color: yellow;
+}
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Familiada Regular';
+  text-transform: uppercase;
+  font-size: 10px;
+}
+.btn{
+  border: 1px dotted yellow;
+  font-size: 2em;
+  font-family: 'Familiada Regular';
+  padding: 2vh 4vw;
+  margin: 2vw;
+}
+input{
+  border: 1px dotted yellow;
+    colort:yellow;
+    padding: 5px;
+    font-size: 0.7em;
+}
+@media(orientation: landscape) and (min-width: 1024px ){
+  .btn{
+    border-width: 3px;
+    font-size: 4em;
+  }
+  input{
+    border-width: 3px;
+    padding: 10px;
+  }
+}
+@media(orientation: landscape) and (min-width: 1366px ){
+  .btn{
+    border-width: 4px;
+    font-size: 5em;
+  }
+  input{
+    border-width: 4px;
+    padding: 10px;
+  }
+}

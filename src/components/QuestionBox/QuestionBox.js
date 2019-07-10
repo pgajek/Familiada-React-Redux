@@ -17,12 +17,14 @@ class QuestionBox extends Component {
     if (answer.length > 0) {
       const index = answers.indexOf(...answer);
       answers[index].correct = true;
+      correctSound.play();
       this.props.correctAnswers(answer);
     } else {
       if (
         this.props[active].fails < 3 &&
         answers.filter(item => item.correct === true).length !== answers.length
       ) {
+        failSound.play();
         this.props.addFails();
       }
     }
@@ -42,7 +44,7 @@ class QuestionBox extends Component {
         <h3 className="question"> {question.question}</h3>
         <div className="answers">{answers}</div>
 
-        <form className="answerForm">
+        <form className="answerForm" autoComplete="off">
           <label htmlFor="inputValue">
             Podaj odpowiedz:
             <input

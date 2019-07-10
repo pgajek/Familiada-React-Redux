@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 const StartPage = ({ start, surname1, surname2, change }) => {
   return (
-    <div className="startingPage">
+    <form className="startingPage" autoComplete="off">
       <h1 className="familiada">Familiada</h1>
       <label htmlFor="surname1">
         Nazwisko 1:
@@ -23,7 +23,7 @@ const StartPage = ({ start, surname1, surname2, change }) => {
         {' '}
         Start
       </button>
-    </div>
+    </form>
   );
 };
 const mapStateToProps = state => {

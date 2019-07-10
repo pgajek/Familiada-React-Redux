@@ -306,6 +306,7 @@ export const rootReducer = (state = initialState, action) => {
       const newQuestions = questions.filter(q => q !== question);
       return {
         ...state,
+        whosFirst: state.gameStarted,
         currentQuestion: question,
         questions: newQuestions,
         team1: {

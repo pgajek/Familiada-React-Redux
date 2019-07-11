@@ -20,8 +20,8 @@ Motivation?
 
 ## Screenshots
 
-![Start Page](/../screenshots/Untitled.jpg)
-![Question Page](/../screenshots/questionbox.jpg)
+![Start Page](/screenshots/Untitled.jpg)
+![Question Page](/screenshots/questionbox.jpg)
 
 ## Technologies
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import './WhosFirst.css';
 import { connect } from 'react-redux';
-
+import * as actionTypes from '../../store/actions/actionTypes';
 const WhosFirst = ({ whosFirst, question, team1, team2 }) => {
   return (
     <div className="whosFirst" onKeyPress={e => whosFirst(e)}>
@@ -27,7 +27,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     whosFirst: e =>
-      dispatch({ type: 'WHOS_FIRST', payload: e.target.dataset.id })
+      dispatch({ type: actionTypes.WHOS_FIRST, payload: e.target.dataset.id })
   };
 };
 export default connect(

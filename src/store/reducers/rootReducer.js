@@ -1,3 +1,4 @@
+import * as actionTypes from '../actions/actionTypes';
 const questions = [
   {
     id: 1,
@@ -254,6 +255,7 @@ const questions = [
 ];
 const initialState = {
   currentQuestion: null,
+  questions,
   team1: {
     name: 'team1',
     points: 0,
@@ -275,18 +277,18 @@ const initialState = {
 
 export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'WHOS_FIRST':
+    case actionTypes.WHOS_FIRST:
       return {
         ...state,
         activeTeam: action.payload,
         whosFirst: false
       };
-    case 'INPUT_CHANGE':
+    case actionTypes.INPUT_CHANGE:
       return {
         ...state,
         [action.payload.name]: action.payload.value
       };
-    case 'START_GAME':
+    case actionTypes.STARG_GAME:
       return {
         ...state,
         team1: {
@@ -301,8 +303,9 @@ export const rootReducer = (state = initialState, action) => {
         gameStarted: true
       };
 
-    case 'NEW_QUESTION':
-      const question = questions[Math.floor(Math.random() * questions.length)];
+    case actionTypes.NEW_QUESTION:
+      const question =
+        state.questions[Math.floor(Math.random() * state.questions.length)];
       const newQuestions = questions.filter(q => q !== question);
       return {
         ...state,
@@ -318,7 +321,7 @@ export const rootReducer = (state = initialState, action) => {
           fails: 0
         }
       };
-    case 'CORRECT_ANSWERS':
+    case actionTypes.CORRECT_ANSWERS:
       const activeTeam = state.activeTeam;
       return {
         ...state,
@@ -329,7 +332,7 @@ export const rootReducer = (state = initialState, action) => {
         }
       };
 
-    case 'ADD_FAILS':
+    case actionTypes.ADD_FAILS:
       const active = state.activeTeam;
       return {
         ...state,
@@ -340,7 +343,7 @@ export const rootReducer = (state = initialState, action) => {
           fails: state[active].fails + 1
         }
       };
-    case 'HANDLE_CHECK_FAILS':
+    case actionTypes.HANDLE_CHECK_FAILS:
       const team = action.payload;
       return {
         ...state,
@@ -349,6 +352,11 @@ export const rootReducer = (state = initialState, action) => {
           ...state[team],
           fails: 2
         }
+      };
+    case actionTypes.NEW_WINNER:
+      return {
+        ...state,
+        winner: action.payload
       };
     default:
       return state;

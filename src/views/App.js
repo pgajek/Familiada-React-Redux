@@ -5,6 +5,7 @@ import './App.css';
 import WhosFirst from '../components/WhosFirst/WhosFirst';
 import { connect } from 'react-redux';
 import intro from '../audio/intro.mp3';
+import * as actionTypes from '../store/actions/actionTypes';
 
 class App extends Component {
   intro = new Audio(intro);
@@ -14,7 +15,7 @@ class App extends Component {
       this.props.handleWhosFirst(e, whosFirst);
     });
     this.props.newQuestion();
-    // this.intro.play();
+    this.intro.play();
   }
   componentWillUnmount() {
     const { whosFirst } = this.props;
@@ -29,13 +30,12 @@ class App extends Component {
       team2,
       handleNewWinner,
       newQuestion,
-      winner,
       handleCheckFails
     } = this.props;
 
     if (team1.fails > 2 && team2.fails > 2) {
       const newWinner = this.checkWinner();
-      if (newWinner !== '' && winner === '') {
+      if (newWinner !== '') {
         handleNewWinner(newWinner);
       } else {
         setTimeout(newQuestion, 3000);
@@ -66,22 +66,18 @@ class App extends Component {
     }
   }
   checkCorrects = () => {
-    const {
-      currentQuestion,
-      winner,
-      handleNewWinner,
-      newQuestion
-    } = this.props;
+    const { currentQuestion, handleNewWinner, newQuestion } = this.props;
     if (
       currentQuestion.answers.filter(answer => answer.correct === false)
         .length === 0
     ) {
       const newWinner = this.checkWinner();
 
-      if (newWinner !== '' && winner === '') {
+      if (newWinner !== '') {
         handleNewWinner(newWinner);
+      } else {
+        setTimeout(newQuestion, 3000);
       }
-      setTimeout(newQuestion, 3000);
     }
   };
   componentDidUpdate() {
@@ -127,17 +123,17 @@ const mapDispatchToProps = dispatch => {
     handleWhosFirst: (e, whosFirst) => {
       if (whosFirst) {
         if (e.keyCode === 65) {
-          dispatch({ type: 'WHOS_FIRST', payload: 'team1' });
+          dispatch({ type: actionTypes.WHOS_FIRST, payload: 'team1' });
         } else if (e.keyCode === 76) {
-          dispatch({ type: 'WHOS_FIRST', payload: 'team2' });
+          dispatch({ type: actionTypes.WHOS_FIRST, payload: 'team2' });
         }
       }
     },
-    newQuestion: () => dispatch({ type: 'NEW_QUESTION' }),
+    newQuestion: () => dispatch({ type: actionTypes.NEW_QUESTION }),
     handleNewWinner: winner =>
-      dispatch({ type: 'NEW_WINNER', payload: winner }),
+      dispatch({ type: actionTypes.NEW_WINNER, payload: winner }),
     handleCheckFails: team =>
-      dispatch({ type: 'HANDLE_CHECK_FAILS', payload: team })
+      dispatch({ type: actionTypes.HANDLE_CHECK_FAILS, payload: team })
   };
 };
 export default connect(

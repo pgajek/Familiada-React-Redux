@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/pgajek/Familiada-React-Redux/precache-manifest.9f6e97d62e1999b89108b243be6dcec9.js"
+  "/Familiada-React-Redux/precache-manifest.bc0b74a2a19ef034541dcaef8b8b6c04.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/pgajek/Familiada-React-Redux/index.html", {
+workbox.routing.registerNavigationRoute("/Familiada-React-Redux/index.html", {
   
   blacklist: [/^\/_/,/\/[^/]+\.[^/]+$/],
 });
